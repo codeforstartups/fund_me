@@ -5,3 +5,4 @@ complier:
   solc:
     remappings:
       - '@chainlink=smartcontractkit/chainlink-brownie-contracts@1.1.1'
+      
