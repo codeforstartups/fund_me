@@ -14,7 +14,7 @@ contract FundMe {
     AggregatorV3Interface public priceFeed;
 
     constructor(address _priceFeed) public {
-        priceFeed = AggregatorV3Interface(_priceFeed)
+        priceFeed = AggregatorV3Interface(_priceFeed);
         owner = msg.sender;
     }
 
@@ -46,6 +46,13 @@ contract FundMe {
         uint256 ethPrice = getPrice();
         uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1000000000000000000;
         return ethAmountInUsd;
+    }
+
+    function getEnteranceFee() public view returns (uint256) {
+        uint256 minimumUSD = 50 * 10**18;
+        uint256 price = getPrice();
+        uint256 precision = 1 * 10**18;
+        return (minimumUSD * precision) / price;
     }
 
     modifier onlyOwner {
